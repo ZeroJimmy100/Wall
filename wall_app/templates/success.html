@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <a href="/logoutUser">Log Out</a>
+   <h1>Success! Welcome, {{ create_user.first_name }}!</h1>
+   <p>Successfully registered (or logged in)!</p>
+   <br>
+   <form action='/success/update/message' method='post'>
+        {% csrf_token %}
+        <input type="text" name="get_message">
+        <input type="submit" value="Post a Message">
+    </form>
+    <br>
+        {% for myMessages in go_message %}	
+
+        <li><em>{{ myMessages.users.first_name }} {{ myMessages.users.last_name }} {{myMessages.message}}</em></li>
+
+            {% if myMessages.users.id == create_user.id %}
+                <a href="/message/delete/{{myMessages.id}}">Delete</a>
+            {% endif %}
+        
+                {% for Mycomment in go_comment %}
+                    {% if myMessages.id == Mycomment.messages.id %}
+                    
+                        <p>{{ Mycomment.users.first_name }} {{ Mycomment.users.last_name }} {{ Mycomment.comment }}</p>
+                    
+                        {% if Mycomment.users.id == create_user.id %}
+                        <a href="/comment/delete/{{Mycomment.id}}">Delete</a>
+                        {% endif %}
+                    {% endif %}
+                
+            {% endfor %}
+
+            <form action='/success/update/comment/{{myMessages.id}}' method='post'>
+                {% csrf_token %}
+                <input type="text" name="get_comment">
+                <input type="hidden" name = "This_Message.id" value="{{ myMessages.id }}">
+                <input type="submit" value="Post a Comment">
+            </form>
+
+        {% endfor %}
+        <br>
+
+
+</body>
+
+</html>

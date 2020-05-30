@@ -1,0 +1,39 @@
+#wrapper{
+    width: 970px;
+    min-height: 900px;
+    background-color: grey;
+    margin: 0px auto;
+}
+
+li{
+    list-style-type: none;
+} 
+
+.Regist_space{
+    display: inline-block;
+}
+
+.log{
+    display: inline-block;
+    margin-left: 300px;
+}
+
+.login_users{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#registerBox{
+    height:400px;
+    width:420px;
+    background-color: gray;
+    display: inline-block;
+}
+
+#loginBox{
+    height: 400px;
+    width: 312px;
+    background-color:gray;
+    display: inline-block;
+    vertical-align: top;
+}
